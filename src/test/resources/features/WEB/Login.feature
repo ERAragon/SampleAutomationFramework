@@ -1,6 +1,6 @@
 Feature: Login Feature
 
-  @TestAutoWeb
+  @TestAutoWEB
   Scenario: Successful login with valid credentials
     Given user is on the login page
     When user enters username "student" and password "Password123"
