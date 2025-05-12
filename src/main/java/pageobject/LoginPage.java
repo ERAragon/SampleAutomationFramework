@@ -3,38 +3,46 @@ package pageobject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-    WebDriver driver;
+public class LoginPage extends BasePage {
 
-    private By usernameField = By.id("username");
-    private By passwordField = By.id("password");
-    private By submitButton = By.id("submit");
-    private By homepageIndicator = By.cssSelector("h1.post-title");
-    private By logoutButton = By.xpath("//a[text()='Log out']");
-    private By loginpageIndicator = By.xpath("//h2[text()='Test login']");
+    private final By usernameField = By.id("username");
+    private final By passwordField = By.id("password");
+    private final By submitButton = By.id("submit");
+    private final By homepageIndicator = By.cssSelector("h1.post-title");
+    private final By logoutButton = By.xpath("//a[text()='Log out']");
+    private final By loginpageIndicator = By.xpath("//h2[text()='Test login']");
+
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void enterUsername(String username) {
-        driver.findElement(usernameField).sendKeys(username);
+        type(usernameField, username);
     }
 
     public void enterPassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+        type(passwordField, password);
     }
 
     public void clickSubmit() {
-        driver.findElement(submitButton).click();
+        click(submitButton);
+    }
+
+    public void login(String username, String password) {
+        enterUsername(username);
+        enterPassword(password);
+        clickSubmit();
     }
 
     public boolean isHomePageDisplayed() {
-        return driver.findElement(homepageIndicator).isDisplayed();
+        return isVisible(homepageIndicator);
     }
-    public void clickLogout(){
-        driver.findElement(logoutButton).click();
+
+    public void clickLogout() {
+        click(logoutButton);
     }
+
     public boolean isLoginPageDisplayed() {
-        return driver.findElement(loginpageIndicator).isDisplayed();
+        return isVisible(loginpageIndicator);
     }
 }
